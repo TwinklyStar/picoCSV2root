@@ -26,7 +26,7 @@ Return to CSV2root/, then:
 It will first rename directories and files inside, e.g. `20231228 (2)`->`20231228_2` and `20231228 (2)_01.csv`->`20231228_01.csv` for subsequent processing.
 
 After running, check `demo/RootData`, 9 root files are generated. Each one corresponds to a directory in `demo` that contains 10 waveforms.
-This number can be set in picoscope GUI.
+This number can be set in picoscope GUI (recommended value: 10000).
 
 If you want to automatically remove CSV file after converting, uncomment the last two lines in `run.sh`
 
