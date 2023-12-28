@@ -50,12 +50,12 @@ Check `plots` folder, the first 10 waveforms should be saved
 You just need to change a few things before applying it to your own data:
 1. `DATA_PATH` in `run.sh` and `merge_root.sh`\
 The new `DATA_PATH` **MUST** have the same structure as `demo` and their name **MUST be YYYYMMDD in 8 digits**, which should be noted when saving the data in picoscope GUI:  
-<img src="figure/structure.png" height="400">
+<div align=center><img src="figure/structure.png" height="400"></div>
 
 2. `EXE_PATH` in `run.sh`  
 You should change it to the FULL PATH where the CSV2root locates, so that you can execute `run.sh` somewhere else.
 3. `offset` and `fpath` in `ana/drawWaveform.cpp`  
 `offset` is the <font color=blue>DC offset</font> in the picoscope GUI for a larger dynamic range.  
 For example, if your signal range is around [-300, 0] mV, instead of choosing $\pm500$mV, we should use $\pm200$mV with DC offset=150mV, as the figure shows.  
-<img src="figure/offset.jpg" height="400">  
-When processing these data, we should subtract the DC offset first.
+When processing these data, we should subtract the DC offset first.  
+<div align=center><img src="figure/offset.jpg" height="400"></div>
