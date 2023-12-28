@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATA_PATH="/Users/mlv/Workspace/Projects/RA/pico/data/test"
+DATA_PATH="demo"
 
 cd $DATA_PATH/RootData
 

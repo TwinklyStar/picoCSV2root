@@ -1,6 +1,6 @@
 void drawWaveform(Int_t evt_num=0){
     Double_t offset = 150;  // The offset of 4 channels (set in picoscope software)
-    TString fpath = "/Users/mlv/Workspace/Projects/RA/pico/data/test/RootData/20231221_0001.root";
+    TString fpath = "../demo/RootData/20231228_merged.root";
 
     TFile* ff = TFile::Open(fpath, "READ");
     TTree* tt = (TTree*) ff->Get("wfm");
@@ -42,7 +42,7 @@ void drawWaveform(Int_t evt_num=0){
     lgd->AddEntry(g4, "Channel D, Offset = -225", "l");
 
     mg->SetTitle(Form("4-Channel Waveforms, Event %d; Time [#mus]; Voltage [mV]", evt_num));
-    mg->GetHistogram()->GetXaxis()->SetRangeUser(-0.5, 10);
+    mg->GetHistogram()->GetXaxis()->SetRangeUser(-0.8, 9.8);
     mg->GetHistogram()->GetYaxis()->SetRangeUser(-450, 250);
     mg->Draw("A");
 

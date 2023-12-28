@@ -22,12 +22,16 @@ for dir in "${DATA_PATH}"/*
 do
 	if [[ "$dir" = "${DATA_PATH}/RootData" ]]; then continue; fi
 	rename 's/ \([0-9]{1,5}\)//g' ${dir}/*.csv
+
+	# Get the file name length
+	str=`ls ${dir} | head -1`
+
 	wfm_num=`ls ${dir} | wc -l`
 	echo -e "\n--Now processing: $dir"
 #	echo "$EXE_PATH ${DATA_PATH}/${dir} $wfm_num $idx"
-	$EXE_PATH ${dir} $wfm_num $idx
+	$EXE_PATH ${dir} $wfm_num $idx ${#str}
 	let idx++
+
 #	echo "--Removing originial CSV file: $dir"
 #	rm -rf $dir
 done
-
