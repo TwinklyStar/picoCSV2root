@@ -50,9 +50,9 @@ The new `DATA_PATH` **MUST** have the same structure as `demo` and their name **
 <div align=center><img src="figure/structure.png" height="400"></div>
 
 2. `EXE_PATH` in `run.sh`  
-You should change it to the FULL PATH where the CSV2root locates, so that you can execute `run.sh` somewhere else.
+You should change it to the FULL PATH where the executable `CSV2root` locates, so that you can execute `run.sh` somewhere else.
 3. `offset` and `fpath` in `ana/drawWaveform.cpp`  
 `offset` is the <font color=blue>DC offset</font> in the picoscope GUI for a larger dynamic range.  
-For example, if your signal range is around [-300, 0] mV, instead of choosing $\pm500$mV, we should use $\pm200$mV with DC offset=150mV, as the figure shows.  
+For example, if your signal range is around [-300, 0] mV, instead of choosing $\pm500$mV, we should use $\pm200$mV with DC offset=150mV for high resolution, as the figure shows.  
 When processing these data, we should subtract the DC offset first.  
 <div align=center><img src="figure/offset.jpg" height="400"></div>
