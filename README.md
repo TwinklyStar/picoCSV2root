@@ -10,20 +10,17 @@ Make sure you can use ROOT before installation
 ```
 git clone https://github.com/TwinklyStar/picoCSV2root.git
 cd CSV2root
-mkdir build
-cd build
-cmake ../
 make
 ```
-If there is no error, an executable file `CSV2root` should appear in `build` directory.
+If there is no error, an executable file `CSV2root` should appear.
 
 ## Demo
 ### Convert CSV to ROOT
-Return to CSV2root/, then:
 ```
 ./run.sh
 ```
-It will first rename directories and files inside, e.g. `20231228 (2)`->`20231228_2` and `20231228 (2)_01.csv`->`20231228_01.csv` for subsequent processing.
+It will first rename directories and files inside, e.g. `20231228 (2)`->`20231228_2` and `20231228 (2)_01.csv`->`20231228_01.csv` for subsequent processing. This process is normally time-consuming and
+may account for more than half of the total time.
 
 After running, check `demo/RootData`, 9 root files are generated. Each one corresponds to a directory in `demo` that contains 10 waveforms.
 This number can be set in picoscope GUI (recommended value: 10000).
