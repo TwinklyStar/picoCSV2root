@@ -26,14 +26,16 @@ void loader(int rate)
 
 int main(int argc, char* argv[]){
 
-    string fpath = argv[1];
-    string date = fpath.substr(fpath.rfind("/")+1, 8);
+    string fpath = argv[1];     // /example/20231228 (1)
+    string date = fpath.substr(fpath.rfind("/")+1, 8);  // 20231228
     int fnum = atoi(argv[2]);
     int output_num = atoi(argv[3]);
-    int infile_name_length = atoi(argv[4]);
+    string infile_name_example = argv[4];   // 20231228 (1)_0001.csv
+    string prefix = infile_name_example.substr(0, infile_name_example.rfind("_"));  // 20231228 (1)
+    int infile_num_length = infile_name_example.rfind(".") - infile_name_example.rfind("_") -1; // 4
 //    std::cout << "aaa" << std::endl;
 //    std::cout << infile_name_length << std::endl;
-    string name_template = date + string("_%0") + to_string(infile_name_length-13) + string("d.csv");
+    string name_template = prefix + string("_%0") + to_string(infile_num_length)+ string("d.csv");  // 20231228 (1)_%04d.csv
 //    string name_template = date + string("_%02d.csv");
     string outname_template = fpath.substr(0, fpath.rfind("/")) + string("/RootData/") + date + string ("_%04d.root");
     string outfname = Form(outname_template.c_str(), output_num);
