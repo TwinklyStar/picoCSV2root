@@ -18,9 +18,11 @@ else
 fi
 
 idx=1
-for dir in "${DATA_PATH}"/*
+for dir in `ls -tr ${DATA_PATH}`
 do
+	dir="${DATA_PATH}/$dir"
 	if [[ "$dir" = "${DATA_PATH}/RootData" ]]; then continue; fi
+	if [[ "$dir" = "${DATA_PATH}/convert.log" ]]; then continue; fi
 	echo -e "\n--Now processing: $dir"
 #	echo "Renameing csv files..."
 #	rename 's/ \([0-9]{1,5}\)//g' ${dir}/*.csv

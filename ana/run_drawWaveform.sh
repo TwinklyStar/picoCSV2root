@@ -1,4 +1,4 @@
-for i in {1..10}
+for i in {0..89}
 do
 	root -l -q 'drawWaveform.cpp('$i')'
 done
