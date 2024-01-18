@@ -5,7 +5,7 @@ Author: Meng Lyu (Shanghai Jiao Tong University)\
 Date: 2023/12/28
 
 ## Installation
-Make sure you can use ROOT before installation
+Make sure you can use ROOT and `rename` command before installation
 
 ```
 git clone https://github.com/TwinklyStar/picoCSV2root.git
