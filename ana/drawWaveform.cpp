@@ -13,10 +13,10 @@ void drawWaveform(Int_t evt_num=0){
     std::vector<Double_t> *ChD_vec  = new std::vector<Double_t>;
 
     tt->SetBranchAddress("Time", &time_vec);
-    tt->SetBranchAddress("ChA", &ChA_vec);
-    tt->SetBranchAddress("ChB", &ChB_vec);
-    tt->SetBranchAddress("ChC", &ChC_vec);
-    tt->SetBranchAddress("ChD", &ChD_vec);
+    tt->SetBranchAddress("ChA", &ChA_vec);  // Depend on the channel configuration in your file
+    tt->SetBranchAddress("ChB", &ChB_vec);  // Depend on the channel configuration in your file
+    tt->SetBranchAddress("ChC", &ChC_vec);  // Depend on the channel configuration in your file
+    tt->SetBranchAddress("ChD", &ChD_vec);  // Depend on the channel configuration in your file
 
     tt->GetEntry(evt_num);
 
