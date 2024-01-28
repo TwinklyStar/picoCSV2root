@@ -118,7 +118,7 @@ int main(int argc, char* argv[]){
         }
 
         // progress bar
-        if (idx % (fnum/100) == 0) loader(idx/(fnum/100));
+        if (fnum >= 100 && idx % (fnum/100) == 0) loader(idx/(fnum/100));
 
 //        cout << "Processing file: " << full_path << "..." << std::endl;
         bool if_exception = false;
@@ -147,6 +147,7 @@ int main(int argc, char* argv[]){
                 int idx_min = std::distance(itr->second->begin(), itr_min);
 
                 auto stat_itr = ch_map.find(str);
+                if (stat_itr == ch_map.end()) continue;
                 stat_itr->second->max_v = *itr_max;
                 stat_itr->second->min_v = *itr_min;
                 stat_itr->second->max_t = time_vec.at(idx_max);
