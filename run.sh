@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Data path
-DATA_PATH="demo_bk"
+DATA_PATH="demo"
 EXE_PATH="./CSV2root"
 
 # Remove blank and bracket in file names. e.g. '20231221 (2)'-> '20231221_2'
