@@ -18,6 +18,7 @@ Make sure you can use ROOT and `rename` command before installation
 ```
 git clone https://github.com/TwinklyStar/picoCSV2root.git
 cd CSV2root
+chmod u+x run.sh merge_root.sh rm_csv.sh
 make
 ```
 If there is no error, an executable file `CSV2root` should appear.
@@ -27,6 +28,7 @@ If there is no error, an executable file `CSV2root` should appear.
 ```
 ./run.sh
 ```
+
 It will first rename directories inside, e.g. `20231228 (2)`->`20231228_2` for subsequent processing.
 
 After running, check `demo/RootData`, 9 root files are generated. Each one corresponds to a directory in `demo` that contains 10 waveforms.
