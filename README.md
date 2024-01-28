@@ -2,10 +2,15 @@
 
 This is a `C++ & shell script` program that automatically convert CSV file from picoscope output to CERN root file.
 Supported system: Linux & MacOS  
-The output file format is the same as the output from DRS4bin2ROOT package: https://github.com/TwinklyStar/DRS4bin2root 
-so that data from two digitizers can share the same analysis program (as provided in demo)  
 Author: Meng Lyu (Shanghai Jiao Tong University)\
 Date: 2024/01/28
+
+## Description
+This program supports automatic channel number detection.
+The output file format is the same as the output from [DRS4bin2ROOT package](https://github.com/TwinklyStar/DRS4bin2root)
+so that data from two digitizers can share the same analysis program (as provided in demo).  
+At present, the program only supports processing from 1 picoScope. (DRS4 ver. supports up to 2 DRS4 mode in 
+daisy-chain mode)
 
 ## Installation
 Make sure you can use ROOT and `rename` command before installation
