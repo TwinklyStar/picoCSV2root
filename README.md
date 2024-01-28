@@ -50,7 +50,7 @@ cd ana
 Check `plots` folder, the first 10 waveforms should be saved
 
 ## Acquire your data
-1. Set maximum waveforms, after will the "on buffer full" event will be triggered:  
+1. Set maximum waveforms, after which the "on buffer full" event will be triggered:  
 <div align=center><img src="figure/buffer.png" height="350"></div>  
 
 2. Set continuous DAQ:
