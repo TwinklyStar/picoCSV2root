@@ -32,7 +32,7 @@ It will first rename directories inside, e.g. `20231228 (2)`->`20231228_2` for s
 After running, check `demo/RootData`, 9 root files are generated. Each one corresponds to a directory in `demo` that contains 10 waveforms.
 This number can be set in picoscope GUI (recommended value: 10000).
 
-If you want to automatically remove CSV file after converting, uncomment the last two lines in `run.sh`
+If you want to automatically remove CSV file after converting, change `DATA_PATH` in `rm_csv.sh` and execute it. 
 
 ### Merge root
 Merge 9 root files into a single one:
