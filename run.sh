@@ -18,11 +18,13 @@ else
 fi
 
 idx=1
+evtNum=0
 for dir in `ls -tr ${DATA_PATH}`
 do
 	dir="${DATA_PATH}/$dir"
 	if [[ "$dir" = "${DATA_PATH}/RootData" ]]; then continue; fi
-	if [[ "$dir" = "${DATA_PATH}/convert.log" ]]; then continue; fi
+	if [[ "$dir" == "${DATA_PATH}/*.log" ]]; then continue; fi
+	if [[ "$dir" == "${DATA_PATH}/*.pssettings" ]]; then continue; fi
 	echo -e "\n--Now processing: $dir"
 #	echo "Renameing csv files..."
 #	rename 's/ \([0-9]{1,5}\)//g' ${dir}/*.csv
@@ -33,8 +35,9 @@ do
 	wfm_num=`ls "${dir}" | wc -l`
 #	echo "$EXE_PATH ${DATA_PATH}/${dir} $wfm_num $idx"
   echo "Start conversion..."
-	$EXE_PATH "${dir}" $wfm_num $idx "${str}"
+	$EXE_PATH "${dir}" $wfm_num $idx "${str}" $evtNum
 	let idx++
+	let evtNum+=wfm_num
 
 #	echo "--Removing originial CSV file: $dir"
 #	rm -rf $dir

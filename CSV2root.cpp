@@ -6,6 +6,7 @@
 #include "TTree.h"
 #include "TFile.h"
 #include "TString.h"
+#include "TMath.h"
 
 using namespace std;
 
@@ -24,6 +25,14 @@ void loader(int rate)
     fflush(stdout);                                 //刷新屏幕打印
 }
 
+struct channel_stat{
+    Double_t max_v;
+    Double_t max_t;
+    Double_t min_v;
+    Double_t min_t;
+    Double_t mean;
+    Double_t RMS;
+};
 int main(int argc, char* argv[]){
 
     string fpath = argv[1];     // /example/20231228 (1)
@@ -31,6 +40,7 @@ int main(int argc, char* argv[]){
     int fnum = atoi(argv[2]);
     int output_num = atoi(argv[3]);
     string infile_name_example = argv[4];   // 20231228 (1)_0001.csv
+    UInt_t evt_num = atoi(argv[5]);
     string prefix = infile_name_example.substr(0, infile_name_example.rfind("_"));  // 20231228 (1)
     int infile_num_length = infile_name_example.rfind(".") - infile_name_example.rfind("_") -1; // 4
 //    std::cout << "aaa" << std::endl;
@@ -42,16 +52,25 @@ int main(int argc, char* argv[]){
     TFile *ff = new TFile(outfname.c_str(), "RECREATE");
     TTree *tt = new TTree("wfm", "A tree storing waveform data from Picoscope");
 
-    vector<Double_t> time_vec, chA, chB, chC, chD;
+    vector<Double_t> time_vec, ChA1_V, ChB1_V, ChC1_V, ChD1_V;
+    channel_stat *ChA1_stat = new channel_stat;
+    channel_stat *ChB1_stat = new channel_stat;
+    channel_stat *ChC1_stat = new channel_stat;
+    channel_stat *ChD1_stat = new channel_stat;
     Int_t smp_num;
 
     // This part is the simplification of saving data
     map<string, vector<Double_t>*> data_map;
+    map<string, channel_stat*> ch_map;
     data_map.insert(pair<string, vector<Double_t>*> ("Time", &time_vec));
-    data_map.insert(pair<string, vector<Double_t>*> ("Channel A", &chA));
-    data_map.insert(pair<string, vector<Double_t>*> ("Channel B", &chB));
-    data_map.insert(pair<string, vector<Double_t>*> ("Channel C", &chC));
-    data_map.insert(pair<string, vector<Double_t>*> ("Channel D", &chD));
+    data_map.insert(pair<string, vector<Double_t>*> ("Channel A", &ChA1_V));
+    data_map.insert(pair<string, vector<Double_t>*> ("Channel B", &ChB1_V));
+    data_map.insert(pair<string, vector<Double_t>*> ("Channel C", &ChC1_V));
+    data_map.insert(pair<string, vector<Double_t>*> ("Channel D", &ChD1_V));
+    ch_map.insert(pair<string, channel_stat*> ("Channel A", ChA1_stat));
+    ch_map.insert(pair<string, channel_stat*> ("Channel B", ChB1_stat));
+    ch_map.insert(pair<string, channel_stat*> ("Channel C", ChC1_stat));
+    ch_map.insert(pair<string, channel_stat*> ("Channel D", ChD1_stat));
     vector<string> col_title;
 
     // Waveform Loop
@@ -64,23 +83,31 @@ int main(int argc, char* argv[]){
         doc.SetStartLineNum(3);    // for CSV from picoscope, the first three rows are not data
 
         if (idx == 1){  // register branch according to channel number
-            tt->Branch("SampNum", &smp_num, "SampNum/I");
-            tt->Branch("Time", &time_vec);
+            tt->Branch("EvtNum", &evt_num, "EvtNum/i");
+            tt->Branch("Data_Length", &smp_num, "Data_Length/I");
             col_title.push_back("Time");
             if (doc.GetColumnIdx("Channel A") >= 0){
-                tt->Branch("ChA", &chA);
+                tt->Branch("ChA1_T", &time_vec);
+                tt->Branch("ChA1_V", &ChA1_V);
+                tt->Branch("ChA1_stat", ChA1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
                 col_title.push_back("Channel A");
             }
             if (doc.GetColumnIdx("Channel B") >= 0){
-                tt->Branch("ChB", &chB);
+                tt->Branch("ChB1_T", &time_vec);
+                tt->Branch("ChB1_V", &ChB1_V);
+                tt->Branch("ChB1_stat", ChB1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
                 col_title.push_back("Channel B");
             }
             if (doc.GetColumnIdx("Channel C") >= 0){
-                tt->Branch("ChC", &chC);
+                tt->Branch("ChC1_T", &time_vec);
+                tt->Branch("ChC1_V", &ChC1_V);
+                tt->Branch("ChC1_stat", ChC1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
                 col_title.push_back("Channel C");
             }
             if (doc.GetColumnIdx("Channel D") >= 0){
-                tt->Branch("ChD", &chD);
+                tt->Branch("ChD1_T", &time_vec);
+                tt->Branch("ChD1_V", &ChD1_V);
+                tt->Branch("ChD1_stat", ChD1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
                 col_title.push_back("Channel D");
             }
             if (output_num == 1) {
@@ -106,24 +133,50 @@ int main(int argc, char* argv[]){
             }
         }
         smp_num = time_vec.size();
-        if (!if_exception)
+
+        if (!if_exception) {
+            // Preliminary data analysis
+            for (auto str: col_title) {
+                auto itr = data_map.find(str);
+                auto itr_max = TMath::LocMax(itr->second->begin(),
+                                             itr->second->end());     // return vector iterator
+                auto itr_min = TMath::LocMin(itr->second->begin(),
+                                             itr->second->end());     // return vector iterator
+                int idx_max = std::distance(itr->second->begin(),
+                                            itr_max);             // vector iterator to index
+                int idx_min = std::distance(itr->second->begin(), itr_min);
+
+                auto stat_itr = ch_map.find(str);
+                stat_itr->second->max_v = *itr_max;
+                stat_itr->second->min_v = *itr_min;
+                stat_itr->second->max_t = time_vec.at(idx_max);
+                stat_itr->second->min_t = time_vec.at(idx_min);
+                stat_itr->second->mean = TMath::Mean(itr->second->begin(), itr->second->end());
+                stat_itr->second->RMS = TMath::RMS(itr->second->begin(), itr->second->end());
+            }
             tt->Fill();
+        }
+        evt_num++;
 
+        // Release memory
         time_vec.clear();
-        chA.clear();
-        chB.clear();
-        chC.clear();
-        chD.clear();
-
         time_vec.shrink_to_fit();
-        chA.shrink_to_fit();
-        chB.shrink_to_fit();
-        chC.shrink_to_fit();
-        chD.shrink_to_fit();
+        ChA1_V.clear();
+        ChA1_V.shrink_to_fit();
+        ChB1_V.clear();
+        ChB1_V.shrink_to_fit();
+        ChC1_V.clear();
+        ChC1_V.shrink_to_fit();
+        ChD1_V.clear();
+        ChD1_V.shrink_to_fit();
     }
 
     ff->Write();
     ff->Close();
+    delete ChA1_stat;
+    delete ChB1_stat;
+    delete ChC1_stat;
+    delete ChD1_stat;
     std::cout << "\rSave file as: " << outfname << std::endl;
 }
 
