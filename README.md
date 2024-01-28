@@ -4,9 +4,8 @@ This is a `C++ & shell script` program that automatically convert CSV file from 
 Supported system: Linux & MacOS  
 The output file format is the same as the output from DRS4bin2ROOT package: https://github.com/TwinklyStar/DRS4bin2root 
 so that data from two digitizers can share the same analysis program (as provided in demo)  
----
 Author: Meng Lyu (Shanghai Jiao Tong University)\
-Date: 2023/12/28
+Date: 2024/01/28
 
 ## Installation
 Make sure you can use ROOT and `rename` command before installation
