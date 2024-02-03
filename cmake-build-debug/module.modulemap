@@ -1,0 +1,7 @@
+module "CSV2root" {
+  requires cplusplus
+  module "channel_info.h" { header "channel_info.h" export * }
+  link "libCSV2root.dylib"
+  export *
+}
+
