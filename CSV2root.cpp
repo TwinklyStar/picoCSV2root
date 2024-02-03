@@ -85,29 +85,46 @@ int main(int argc, char* argv[]){
         if (idx == 1){  // register branch according to channel number
             tt->Branch("EvtNum", &evt_num, "EvtNum/i");
             tt->Branch("Data_Length", &smp_num, "Data_Length/I");
+            tt->Branch("Time", &time_vec);
             col_title.push_back("Time");
             if (doc.GetColumnIdx("Channel A") >= 0){
-                tt->Branch("ChA1_T", &time_vec);
                 tt->Branch("ChA1_V", &ChA1_V);
-                tt->Branch("ChA1_stat", ChA1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
+                tt->Branch("ChA1_max_v", &ChA1_stat->max_v, "ChA1_max_v/D");
+                tt->Branch("ChA1_max_t", &ChA1_stat->max_t, "ChA1_max_t/D");
+                tt->Branch("ChA1_min_v", &ChA1_stat->min_v, "ChA1_min_v/D");
+                tt->Branch("ChA1_min_t", &ChA1_stat->min_t, "ChA1_min_t/D");
+                tt->Branch("ChA1_mean",  &ChA1_stat->mean,  "ChA1_mean/D");
+                tt->Branch("ChA1_RMS",   &ChA1_stat->RMS,   "ChA1_RMS/D");
                 col_title.push_back("Channel A");
             }
             if (doc.GetColumnIdx("Channel B") >= 0){
-                tt->Branch("ChB1_T", &time_vec);
                 tt->Branch("ChB1_V", &ChB1_V);
-                tt->Branch("ChB1_stat", ChB1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
+                tt->Branch("ChB1_max_v", &ChB1_stat->max_v, "ChB1_max_v/D");
+                tt->Branch("ChB1_max_t", &ChB1_stat->max_t, "ChB1_max_t/D");
+                tt->Branch("ChB1_min_v", &ChB1_stat->min_v, "ChB1_min_v/D");
+                tt->Branch("ChB1_min_t", &ChB1_stat->min_t, "ChB1_min_t/D");
+                tt->Branch("ChB1_mean",  &ChB1_stat->mean,  "ChB1_mean/D");
+                tt->Branch("ChB1_RMS",   &ChB1_stat->RMS,   "ChB1_RMS/D");
                 col_title.push_back("Channel B");
             }
             if (doc.GetColumnIdx("Channel C") >= 0){
-                tt->Branch("ChC1_T", &time_vec);
                 tt->Branch("ChC1_V", &ChC1_V);
-                tt->Branch("ChC1_stat", ChC1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
+                tt->Branch("ChC1_max_v", &ChC1_stat->max_v, "ChC1_max_v/D");
+                tt->Branch("ChC1_max_t", &ChC1_stat->max_t, "ChC1_max_t/D");
+                tt->Branch("ChC1_min_v", &ChC1_stat->min_v, "ChC1_min_v/D");
+                tt->Branch("ChC1_min_t", &ChC1_stat->min_t, "ChC1_min_t/D");
+                tt->Branch("ChC1_mean",  &ChC1_stat->mean,  "ChC1_mean/D");
+                tt->Branch("ChC1_RMS",   &ChC1_stat->RMS,   "ChC1_RMS/D");
                 col_title.push_back("Channel C");
             }
             if (doc.GetColumnIdx("Channel D") >= 0){
-                tt->Branch("ChD1_T", &time_vec);
                 tt->Branch("ChD1_V", &ChD1_V);
-                tt->Branch("ChD1_stat", ChD1_stat, "max_v/D:max_t/D:min_v/D:min_t/D:mean/D:RMS/D");
+                tt->Branch("ChD1_max_v", &ChD1_stat->max_v, "ChD1_max_v/D");
+                tt->Branch("ChD1_max_t", &ChD1_stat->max_t, "ChD1_max_t/D");
+                tt->Branch("ChD1_min_v", &ChD1_stat->min_v, "ChD1_min_v/D");
+                tt->Branch("ChD1_min_t", &ChD1_stat->min_t, "ChD1_min_t/D");
+                tt->Branch("ChD1_mean",  &ChD1_stat->mean,  "ChD1_mean/D");
+                tt->Branch("ChD1_RMS",   &ChD1_stat->RMS,   "ChD1_RMS/D");
                 col_title.push_back("Channel D");
             }
             if (output_num == 1) {
