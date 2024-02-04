@@ -12,7 +12,7 @@ void drawWaveform(Int_t evt_num=0){
     std::vector<Double_t> *ChC_vec  = new std::vector<Double_t>;
     std::vector<Double_t> *ChD_vec  = new std::vector<Double_t>;
 
-    tt->SetBranchAddress("ChA1_T", &time_vec);  // For pico output, ChA1_T - ChD1_T are identical
+    tt->SetBranchAddress("Time", &time_vec);  // For pico output, ChA1_T - ChD1_T are identical
     tt->SetBranchAddress("ChA1_V", &ChA_vec);  // Depend on the channel configuration in your file
     tt->SetBranchAddress("ChB1_V", &ChB_vec);  // Depend on the channel configuration in your file
     tt->SetBranchAddress("ChC1_V", &ChC_vec);  // Depend on the channel configuration in your file
