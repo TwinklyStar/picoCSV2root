@@ -133,7 +133,7 @@ The class has following members and function:
 
 ### File structure
 The output root file structure in tree `wfm` is as follows:
-<div align=center><img src="figure/roottree.png" height="400"></div>
+<div align=center><img src="figure/roottree.png" height="300"></div>
 Unlike DRS4, the file does not contain capture time of each waveform, and 
 all channels share the same time series. But the rest are the same:
 
