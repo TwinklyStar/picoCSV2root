@@ -106,7 +106,7 @@ root -l -q 'simpAna.C("/path/to/your/data")'
 ```
 
 ### ChannelReader Class
-The demo analysis program utilizes the `ChannelReader` class to read data from pico and DRS4 and read in the channel data
+The demo analysis program utilizes the `ChannelReader` class to read waveform data from pico and DRS4 and read in the channel data
 as class members, which can largely simplify the analysis program. You can also include it for your own analysis program.  
 When creating an instance of this class, you should give a channel name as input parameter:
 ```
