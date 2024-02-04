@@ -1,0 +1,7 @@
+/.idea/
+/cmake-build-debug/
+/old/
+/demo_bk/
+/CMakeLists.txt
+/CSV2root
+/*.DSYM
