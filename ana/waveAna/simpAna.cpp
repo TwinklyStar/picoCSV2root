@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void simpAna(TString infname="../../demo_bk/RootData/20231228_merged.root"){
+void simpAna(TString infname="../../demo/RootData/20231228_merged.root"){
     cout << "********************************************************************" << endl;
     cout << "*****            Welcome to waveform data analysis             *****" << endl;
     cout << "********************************************************************" << endl;
