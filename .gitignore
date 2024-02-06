@@ -5,3 +5,5 @@
 /CMakeLists.txt
 /CSV2root
 /*.DSYM
+/backup
+/ana/drawWaveform/plots
