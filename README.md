@@ -105,6 +105,15 @@ To use it to your own data:
 root -l -q 'simpAna.C("/path/to/your/data")'
 ```
 
+### Peak search
+Go to `ana/find-peaks` folder and find the `example.cpp`. You can develop you own analysis code based on this example.  
+To run demo:
+```
+root -l -q example.C > test.log
+```
+In `test.log`, it will output the time of peaks in the first 10 waveforms.
+To find positive peaks, change the last parameter in `PeakFinder::findPeaks` from -1 to 1.
+
 ### ChannelReader Class
 The demo analysis program utilizes the `ChannelReader` class to read waveform data from pico and DRS4 and read in the channel data
 as class members, which can largely simplify the analysis program. You can also include it for your own analysis program.  
