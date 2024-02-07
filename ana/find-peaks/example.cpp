@@ -28,7 +28,7 @@ void example()
     ChannelReader ChA1("ChA1"), ChB1("ChB1"), ChC1("ChC1"), ChD1("ChD1"),
                   ChA2("ChA2"), ChB2("ChB2"), ChC2("ChC2"), ChD2("ChD2");
 
-    TFile* fo = TFile::Open(outfpath, "RECREATE");
+//    TFile* fo = TFile::Open(outfpath, "RECREATE");
 
 	int nentries = tt->GetEntries();
 	std::cout << "Processing " << nentries << " events..." << std::endl;
@@ -83,9 +83,9 @@ void example()
 		peakn_C1.clear(); peakn_C1.shrink_to_fit();
 		peakn_D1.clear(); peakn_D1.shrink_to_fit();
 	}
-	fo->Write();
-	fo->Close();
-	std::cout << "\nSave file as: " << outfpath << std::endl;
+//	fo->Write();
+//	fo->Close();
+//	std::cout << "\nSave file as: " << outfpath << std::endl;
 
 }
 
