@@ -3,7 +3,6 @@
 #include "TGraph.h"
 #include "TMultiGraph.h"
 #include "TLegend.h"
-#include "TH1F.h"
 
 void drawWaveform(Int_t evt_num=0){
     Double_t offset = 150;  // The offset of 4 channels (set in picoscope software)
@@ -17,7 +16,7 @@ void drawWaveform(Int_t evt_num=0){
 
     // Input parameter is the channel name that determines which channel the reader will read
     ChannelReader ChA1("ChA1"), ChB1("ChB1"), ChC1("ChC1"), ChD1("ChD1"),
-                  ChA2("ChA2"), ChB2("ChB2"), ChC2("ChC2"), ChD2("ChD2");
+            ChA2("ChA2"), ChB2("ChB2"), ChC2("ChC2"), ChD2("ChD2");
 
     tt->GetEntry(evt_num);
 
@@ -29,12 +28,10 @@ void drawWaveform(Int_t evt_num=0){
     auto g4 = new TGraph; g4->SetLineColor(kOrange);    g4->SetLineWidth(3); g4->SetTitle("Channel D");
     auto lgd = new TLegend(0.75, 0.74, 0.995, 0.99);
 
-    for (int i=0; i<ChA1.T->size(); i++){
-        g1->SetPoint(i, ChA1.T->at(i), ChA1.V->at(i) - offset + 225);
-        g2->SetPoint(i, ChB1.T->at(i), ChB1.V->at(i) - offset +  75);
-        g3->SetPoint(i, ChC1.T->at(i), ChC1.V->at(i) - offset -  75);
-        g4->SetPoint(i, ChD1.T->at(i), ChD1.V->at(i) - offset - 225);
-    }
+    ChA1.PlotWave(g1,  225 - offset);
+    ChB1.PlotWave(g2,   75 - offset);
+    ChC1.PlotWave(g3,  -75 - offset);
+    ChD1.PlotWave(g4, -225 - offset);
 
     mg->Add(g1); mg->Add(g2); mg->Add(g3); mg->Add(g4);
     lgd->AddEntry(g1, "Channel A1, Offset =  225", "l");
@@ -49,6 +46,6 @@ void drawWaveform(Int_t evt_num=0){
 
     lgd->Draw();
 //	cc->Draw();
-	cc->SaveAs(Form("plots/%05d.png", evt_num));
+    cc->SaveAs(Form("plots/%05d.png", evt_num));
     delete cc;
 }

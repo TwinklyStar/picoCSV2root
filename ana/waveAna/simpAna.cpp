@@ -18,7 +18,7 @@ void simpAna(TString infname="../../demo/RootData/20231228_merged.root"){
 
     // Input parameter is the channel name that determines which channel the reader will read
     ChannelReader ChA1("ChA1"), ChB1("ChB1"), ChC1("ChC1"), ChD1("ChD1"),
-                  ChA2("ChA2"), ChB2("ChB2"), ChC2("ChC2"), ChD2("ChD2");
+            ChA2("ChA2"), ChB2("ChB2"), ChC2("ChC2"), ChD2("ChD2");
 
     Int_t data_length;
     UInt_t evt_num;
